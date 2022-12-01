@@ -1,0 +1,93 @@
+---
+title: "Unescaped_html"
+author: "TecoVelas"
+date: "2022-12-01"
+output: html_document
+---
+
+
+
+## Lectura de Excel y unescaped
+
+
+```{r}
+library(rJava)
+library(xlsx)
+currentDir <- getwd()
+parentPath <- dirname(currentDir)
+Example <- read.xlsx2(paste0(parentPath, file = "/datos/example.xlsx"), sheetIndex=1,startRow=1,endRow=60, row.names=NULL, colIndex=c(1:5),header=TRUE)
+```
+
+
+#UNESCAPE HTML
+
+```{r}
+Example$HTML <- gsub("&nbsp;"," ",Example$HTML)
+Example$HTML <- gsub("&amp;","&",Example$HTML)
+Example$HTML <- gsub("&lt;","<",Example$HTML)
+Example$HTML <- gsub("&gt;",">",Example$HTML)
+Example$HTML <- gsub("&quot;","\"",Example$HTML)
+Example$HTML <- gsub("&apos;","'",Example$HTML)
+Example$HTML <- gsub("&euro;","€",Example$HTML)
+Example$HTML <- gsub("&ndash;","-",Example$HTML)
+#Hay un par de filas que no tiene el "&" asi que hacemos dos replace para este caso
+Example$HTML <- gsub("ndash","-",Example$HTML)
+
+```
+
+#Libreria dplyr
+```{r}
+library(dplyr)
+#Select de 2 formas
+tail(select(Example, Year, HTML))
+Example %>% select(Year,HTML) %>% tail()
+#Rename
+Example <- Example %>% rename ("CIUDAD"= colnames(Example)[2])
+Example <- Example %>% rename ("Street1"= colnames(Example)[3])
+Example <- Example %>% rename ("Street2"= colnames(Example)[4])
+Example <- Example %>% rename ("HTML"= colnames(Example)[5])
+
+#Cambiar todo el nombre de las columnas a mayusculas
+Example <- Example %>%rename_with(toupper)
+
+#Filter
+Example %>%filter(Street2=="Alum Rock Road") %>%
+select(1:5) %>% head()
+
+#Arrange
+Example %>% arrange(STREET2)
+```
+
+#Libreria tidyr
+```{r}
+library(tidyr)
+str(Example)
+
+unite(Example, "DIRECCION", c(STREET2, CIUDAD), sep=",")
+```
+
+#Funciones *apply
+```{r}
+#Hecho en la practica
+```
+
+#DataTable
+
+```{r}
+install.packages("data.table")
+library("data.table")
+dtExample <- as.data.table(Example)
+class(dtExample)
+
+#Contar cuantas de la variable STREET2 se llama Alum Rock Road
+
+dtExample[STREET2 =="Alum Rock Road", .N]
+dtExample[YEAR =="2011", .N]
+
+```
+
+#Grafico
+```{r}
+
+
+```

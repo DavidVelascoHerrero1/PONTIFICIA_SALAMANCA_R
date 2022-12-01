@@ -1,0 +1,589 @@
+---
+  title: "LimpiezayPreprocesado"
+author: "DavidBeckham"
+date: "2022-11-12"
+output: ioslides_presentation
+---
+  
+  ## EJERCICIO 1
+  Comprobar que el fichero está en la ruta especificada.
+
+```{r}
+currentDir <- getwd()
+list.files(path="../datos")
+if (!file.exists("../datos")) 
+{stop(paste0("Se necesita que el directorio datos esté en: ",currentDir))} 
+
+ComprobarInputs <- function(path, dir,file)
+{if (!file.exists(paste0(path,"/",dir)))
+{stop(paste0("Se necesita que el directorio ", dir, " esté en: ",path))}
+  else if (!file.exists(paste0(path, "/",dir,"/", file)))
+  {stop(paste0("Se necesita que ", file," esté en: ", path, "/", dir))}}
+
+parentPath <- dirname(currentDir)
+
+try(ComprobarInputs(parentPath,"datos", "student-mat.csv"), FALSE)
+```
+##EJERCICIO 2
+Comprueba si tienes el fichero “anemonefish.xls” 
+en el subdirectorio “datos” que cuelga de tu directorio actual de trabajo. 
+Si no lo tienes, descárgalo de la URL:
+  Pd: Crear carpeta dentro de currentDir para que cuelgue
+```{r}
+parentPath <- dirname(currentDir)
+dir <- "datos"
+file <- "anemonefish.xls"
+fileURL <- "http://www.ecologia.ib.usp.br/iwdb/data/anemone_fish/anemonefish.xls"
+
+if (!file.exists(paste0(parentPath,"/", dir, "/", file))) {
+  library(downloader)
+  download.file(fileURL, paste0(path,"/",dir, "/", file), mode= "wb")
+}
+try(ComprobarInputs(currentDir,"datos2","anemonefish.xls"), FALSE)
+
+```
+##EJERCICIO 3,4,5
+Leer Excel
+Sólo la primera hoja
+Sólo las filas 14 a 40
+Sólo las columnas 3 a 13
+
+```{r}
+library(xlsx); library(xlsxjars); library(rJava);
+parentPath <- dirname(currentDir)
+anemonefish <- read.xlsx2(paste0(parentPath, file = "/datos/anemonefish.xls"), sheetIndex=1,startRow=14,endRow=40, row.names=NULL, colIndex=c(3:13),header=TRUE)
+
+```
+##EJERCICIO 6
+Con read.csv2(), lee los ficherso “student-por.csv”
+y “student-mat.csv” y cárgalos en dos data.frames
+de nombres “studentPor” y “studentMat”.
+Abre y cierra una conexión “file”.*
+  
+```{r}
+conPor <- file("../datos/student-por.csv","r")
+studentPor <- read.csv2(conPor)
+close(conPor)
+conMat <- file("../datos/student-mat.csv","r")
+studentMat <- read.csv2(conMat)
+close(conMat)
+
+```
+##EJERCICIO 7
+Lee el fichero “beer2.csv” de tu sistema de ficheros local
+y cárgalo en un data.frame de nombre “beer”
+Utiliza una conexión “file”
+Saca por pantalla las primeras filas del data.frame creado.
+View-> Vista
+Las 10 primeras
+Las 10 ultimas
+
+```{r}
+setwd(currentDir)
+conBeer <- file("../datos/beer2.csv","r")
+beer <- read.csv(conBeer, row.names=1)
+close(conBeer)
+View(beer)
+head(beer, 10)
+tail(beer, 10)
+```
+
+##EJERCICIO 8
+¿Hay algún estudiante de Matemáticas con nota final igual a 20?
+  ¿Y todos los estudiantes tienen una nota final positiva?
+  Utiliza any(), all()
+
+```{r}
+any(studentMat$G3 == 20)
+all(studentMat$G3 > 0)
+```
+
+##RESUMEN -SUMMARY
+
+```{r}
+summary(studentMat)
+```
+
+##EJERCICIO 9
+Muestra la clase de todas las columnas del data.frame “studentMat”.
+Usa lapply y class().
+Haz lo mismo con “StudentPor”.
+
+```{r}
+lapply(studentMat, class)
+lapply(studentPor, class)
+
+```
+
+
+##EJERCICIO 10
+
+```{r}
+#View(studentMat)
+studentMat$Mjob <- as.factor(studentMat$Mjob)
+studentPor$Mjob <- as.factor(studentPor$Mjob)
+
+class(studentPor$Mjob)
+class(studentMat$Mjob)
+
+```
+##EJERCICIO 10.2
+Transforma, si no lo está ya, las clases de las columnas
+que no veas adecuadas en el data.frame “beer”.
+
+```{r}
+class(beer$text)
+```
+##EJERCICIO 11
+En el data.frame “beer”, con alguna función de la familia “*apply”, calcula:
+  ¿cuántas filas tienen algún NA?
+  
+```{r}
+rowNaBeer <- beer[rowSums(is.na(beer)) > 0, ]
+dim(rowNaBeer)[1]
+```
+##EJERCICIO 12
+En el data.frame “beer”, con alguna función de la familia “*apply”, averigua:
+  ¿qué columnas tienen algún NA entre sus valores?
+  
+  
+```{r}
+colNaBeer <- beer[colSums(is.na(beer)) > 0]
+dim(colNaBeer)
+
+names(colNaBeer)
+
+```
+
+##EJERCICIO 13
+En el data.frame “beer”, elimina las filas con NA, usando “complete.cases()”
+
+```{r}
+noMissingBeer <- complete.cases(beer)
+beerNoNa <- beer[noMissingBeer,]
+beerNa <- beer[!noMissingBeer,]
+dim(beer)
+dim(beerNa)
+dim(beerNoNa)
+
+rm(beerNoNa)
+rm(beerNa)
+
+```
+##EJERCICIO 14
+En los data.frames studenMat y studentPor,
+¿todos los nombres de columnas están en minúsculas?
+  Si no lo están, conviértelos a minúsculas
+
+```{r}
+names(studentMat)
+names(studentMat) <- tolower(names(studentMat))
+names(studentMat)
+
+names(studentPor)
+names(studentPor) <- tolower(names(studentPor))
+names(studentPor)
+
+```
+
+##EJERCICIO 15
+Asigna a una variable de nombre “inicialVar” el string “esto_es_un_ejemplo”
+Crea una nueva variable llamada “tidyVar”, en la que no aparezcan los underscores
+¿Debes usar sub() o gsub()?
+  
+```{r}
+inicialVar <- "esto_es_un_ejemplo"
+tidyVar <- gsub("_","",inicialVar)
+#tidyVar
+```
+##EJERCICIO 16
+Elimina los underscores de los valores de la la columna “mjob” de los data.frames: “studentMat” y “studentPor”
+Primero calcula cuántos underscores hay en dicha columna (“mjob”) en cada data.frame
+Tras eliminarlos, comprueba que no queda ningún underscore
+
+```{r}
+View(studentMat)
+#Compruebo cuantas _ hay
+length(grep("_",studentMat$mjob))
+length(grep("_",studentPor$mjob))
+
+studentMat$mjob <- gsub("_","",studentMat$mjob)
+studentPor$mjob <- gsub("_","",studentPor$mjob)
+
+length(grep("_",studentMat$mjob))
+length(grep("_",studentPor$mjob))
+```
+
+##EJERCICIO 17
+¿Son apropiados los nombres de las columnas 
+del data.frame “beer”, según la guía de estilo R de Google?
+  
+```{r}
+names(beer)
+
+names(beer) <- gsub(pattern = '(_)([[:lower:]])',perl = TRUE,replacement = '\\U\\2',names(beer))
+```
+##EJERCICIO 18
+Elimina los espacios innecesarios de la columna “text” del data.frame “beer”.
+¿Cuántos espacios has eliminado?
+  
+```{r }
+library(stringr)
+cleanText <- str_trim(beer$text)
+#strsplit(beer$text," ")
+# Comprobamos cuántos espacios hemos eliminado
+trimSpaces <- sum(nchar(beer$text)) - sum(nchar(cleanText))
+trimSpaces
+##View(beer)
+##le paso la columna sin espacios
+beer$text <- cleanText
+#View(beer)
+#rm(cleanText)
+
+#Si quisiera dejar la columna sin espacios
+#sinEspacios <- gsub(" ","",beer$text)
+#sinEspacios
+#beer$text <- sinEspacios
+```
+
+##EJERCICIO 20
+Carga en un data.frame de nombre “religions” el dataset
+“../datos/religions.csv”.
+
+```{r}
+religions <- read.csv2("../datos/religions.csv",header=FALSE)
+```
+
+##EJERCICIO 21
+Observa el objeto “religions” y piensa cómo transformarlo para
+que la primera fila sea de nombres de columnas, y no de datos
+
+```{r}
+salary <- unname(unlist(religions[1,]))
+religions <- religions[2:dim(religions)[1],]
+names(religions) <-salary
+```
+
+##EJERCICIO 24
+ Con melt() de {reshape} , transforma el dataset “religions” en un
+nuevo data.frame de nombre “newReligions”, para que los datos
+de ingresos sean una columna.
+ Muestra las primeras filas y las últimas filas del data.frame
+“newReligions” creado
+
+```{r}
+library(reshape)
+newReligions<- melt(religions,id=c("religion"))
+tail(newReligions)
+```
+
+##Otro Ejercicio
+Tablas de contingencias
+% de casos de la fila y columna
+```{r}
+class(newReligions$value)
+# Como "value" es un factor, lo transformamos a numérico
+newReligions$value <- as.numeric(newReligions$value)
+# Ya podemos aplicar xtabs
+miXt <- xtabs(value ~ religion + variable, data=newReligions)
+library(knitr)
+kable(miXt)
+```
+
+##EJERCICIO 21
+Observa el objeto “religions” y piensa cómo transformarlo para
+que la primera fila sea de nombres de columnas, y no de datos
+
+```{r}
+salary <- unname(unlist(religions[1,]))
+religions <- religions[2:dim(religions)[1],]
+names(religions) <-salary
+```
+
+##Ejercicio25
+Suponemos que de nuestro dataset studentMat, queremos
+calcular la media de nota final (g3), por género, y dependiendo de
+si el alumno tiene una relación amorosa o no.
+Aplica el razonamiento contrario al empleado en el caso de melt(),
+para resolver lo planteado utilizando cast().
+
+```{r}
+mediaRomantic<- cast(studentMat,sex~ romantic,mean, value=c("g3")) 
+kable(mediaRomantic)
+```
+
+##Otro Ejercicio
+ Creamos un objeto “edad” de 10 elementos con rnorm
+(mean=6.5 y sd=3)
+Saca una muestra de 6 elementos
+
+```{r}
+edad <- rnorm(10,mean=6.5,sd=3)
+edad
+sample(edad,size=6,replace=TRUE)
+
+##Asigno probabilidades a la muestra
+##Compruebo que la suma es 1
+probs <- c(0,0.3,0.1,0.3,0,0,0.2,0.1,0,0)
+sum(probs)
+
+sample(edad,size=6,replace=TRUE, prob=probs)
+
+```
+##Otro Ejercicio
+Cuando para poder entrenar y después evaluar un modelo,
+dividimos nuestro dataset en “train” y “test”,
+prefijando por ejemplo una proporción 70/30,
+estamos empleando también el concepto de “subsampling”.
+
+
+```{r}
+set.seed(1234)
+
+#train_row <- sample(1:nrow(dataset),
+#nrow(dataset)*0.7)
+#train_col <- c("in_night", "in_morn",
+#"in_afte", "in_even",
+#"out_night","out_morn",
+#"out_afte", "out_even",
+#"in_total", "out_total",
+#"months", "target")
+#data_train <- dataset[train_row, train_col]
+#data_test <- dataset[-train_row, train_col]
+```
+
+##EJERCICIO 26
+Genera un nuevo data.frame llamado “studentPorRed” que tenga
+las 4 primeras filas y las 3 primeras columnas del data.frame
+“studentPor”.
+ Luego (con “$”) añádele una nueva columna, de nombre “test”,
+con estos 4 valores: TRUE, FALSE, FALSE, TRUE
+
+```{r}
+# Añadir una variable tipo character a un data.frame con $
+studentPorRed <- studentPor[1:4,1:3]
+studentPorRed$test<- c("TRUE","FALSE","FALSE","TRUE")
+class(studentPorRed$test)
+
+```
+
+##EJERCICIO 27
+Repite el ejercicio anterior, añadiendo la variable lógica “test”
+con “cbind()”
+
+```{r}
+studentPorRed <- studentPor[1:4,1:3]
+studentPorRed <- cbind(studentPorRed, c(TRUE,FALSE,FALSE,TRUE))
+names(studentPorRed)[4] <- "test"
+```
+
+
+##EJERCICIO 28
+Crea un nuevo data.frame copia de studentPor que se llame
+studentPorTechM
+Añádele una columna techm, que tenga valor TRUE si el trabajo
+materno (mjob) es “other” o “services”, y FALSE en caso
+contrario.
+Utiliza “%in%”
+
+```{r}
+studentPorTechM <- studentPor
+studentPorTechM$techm <- studentPorTechM$mjob %in% c("other","services")
+table(studentPorTechM$techm)
+```
+
+##EJERCICIO 29
+Crea un nuevo data.frame copia de studentPor que se llame
+studentPorUnempM
+ Añádele una columna unempm, que tenga valor TRUE si el
+trabajo materno (mjob) es “athome”, y FALSE en caso contrario.
+ Utiliza ifelse”
+
+```{r}
+studentPorUnempM <- studentPor
+studentPorUnempM$unempm <-ifelse(studentPorUnempM$mjob == "athome", TRUE, FALSE)
+```
+
+##EJERCICIO 30
+Supón que a partir de los datos del data.frame “studentMat”,
+queremos construir una nueva variable categórica que
+llamaremos “ausencias”, (independiente, NO nueva columna en
+el data.frame), con estos rangos de ausencias:
+ninguna: 0 ausencias
+aceptable: 1 a 10 ausencias
+alta: más de 10 ausencias
+Utiliza “cut2()” de “{Hmisc}”
+
+```{r}
+library(Hmisc)
+ausencias <-cut2(studentMat$absences,c(1,11,75))
+levels(ausencias) <-c("ninguna","aceptable","alta")
+
+# Comprobación:
+length(studentMat[studentMat$absences==0, c("absences")])
+length(studentMat[studentMat$absences>0 & studentMat$absences<11, c("absences")])
+length(studentMat[studentMat$absences>10, c("absences")])
+```
+
+##EJEMPLO MERGE() DT
+DATATABLE
+
+```{r}
+library(data.table)
+miDt1 <- data.table( nombre=c("Juan","Maria","Pablo","Ana"), edades=c(25,30,22,29))
+miDt2 <- data.table(nombre=c("Juan","Maria","Pedro","Ana", "Juanjo"),
+alturas=c(1.65,1.70,1.68,1.85,1.77))
+setkey(miDt1, nombre)
+setkey(miDt2, nombre)
+merge(miDt1,miDt2)
+```
+
+#14. seleccionar variables con select(dplyr)
+
+```{r}
+library(dplyr)
+tail(select(studentMat, school, g3))
+#Lo mismo
+studentMat %>% select(school,g3) %>% tail()
+```
+
+##EJERCICIO 31
+Del DF studentPor selecciona las filas correspondientes a alumnos
+de 15 años.
+Y sólo las 5 primeras columnas.
+Utiliza filter().
+¿Qué otra función de {dplyr} necesitas?
+Muestra sólo la cabecera del resultado.
+
+```{r}
+studentPor %>%filter(age==15) %>%
+select(1:5) %>% head()
+```
+
+##EJERCICIO 32
+ Con mutate()* y el operador pipe %>%**,
+ genera una nueva variable de nombre “g1g2ratio”,
+ que sea un ratio entre la nota del primer y el segundo periodo,
+ para los estudiantes de matemáticas.
+No es necesario que esta nueva variable forme parte del DF
+studentMat.
+Muestra sólo los primeros valores resultantes.
+
+
+```{r}
+studentMat %>% mutate (g1g2ratio=(g1/g2)) %>% select(g1g2ratio) %>% head()
+```
+
+##Resumen SUMMARISE
+
+```{r}
+studentPor %>% summarise(media=mean(absences),mediana=median(absences),variance=var(absences))
+```
+
+##EJERCICIO 33
+Utilizando el operador pipe, “group_by()” y “summarise()”,
+obtén el número de estudiantes
+con una relación amorosa
+por cada posible edad,
+del DF studentPor.
+```{r}
+library(dplyr)
+studentPor %>% group_by(age, romantic) %>% summarise(cuenta=n())
+```
+
+##EJERCICIO 34
+Crea un “data.frame” studentMatPor que contenga los 382
+estudiantes que estudiaron Matemáticas y Portugués, y que tienen
+estos campos en común:
+“school”,“sex”,“age”,“address”,“famsize”,“pstatus”,“medu”,“fedu”,“
+mjob”,“fjob”,“reason”,“nursery”,“internet”
+Utiliza {dplyr}
+
+```{r}
+library(dplyr)
+
+studentMatPor2 <- studentMat %>%
+inner_join(studentPor,
+c("school","sex","age",
+"address","famsize",
+"pstatus","medu",
+"fedu","mjob","fjob",
+"reason","nursery",
+"internet"))
+
+```
+
+##EJERCICIO 35
+Con “gather()” de {tidyr} podemos crear nuevas observaciones a
+partir de variables
+Crea un nuevo DF, de nombre avgGrades, a partir de
+studentMatPor, que tenga para cada escuela:
+la media de la calificación en portugués en la 1ª, 2ª y 3ª evaluación
+y la media de la calificación en matemáticas, en la 1ª, 2ª y 3ª
+evaluación.
+```{r}
+avgGrades <- (studentMatPor %>% group_by(school) %>% summarise(
+meang1mat=mean(g1.x),
+meang2mat=mean(g2.x),
+meang3mat=mean(g3.x),
+meang1por=mean(g1.y),
+meang2por=mean(g2.y),
+meang3por=mean(g3.y)))
+```
+
+##EJERCICIO 36
+
+El DF avgGrades tiene 2 filas y 7 columnas.
+Pero en realidad podríamos considerar que tiene 2 variables:
+“escuela” (school) y “evaluación” (1ª, 2ª, 3ª).
+A partir del data.frame avgGrades genera una “data.table” de
+nombre avgGradesDT con una variable nueva de nombre “grade”
+que contenga la nota media de cada evaluación (“evaluation”) en
+cada “school”
+Para ello, utiliza “gather()” de {dplyr}:
+
+```{r}
+library(tidyr)
+
+avgGradesDT <- data.table(avgGrades)
+avgGradesDTGather <- gather(avgGradesDT,"evaluation","grade",2:7,convert=TRUE)
+```
+
+##EJERCICIO 37
+ A partir de avgGradesDTGather
+ utiliza “spread()” para volver a generar un DF
+ con la misma estructura que avgGrades,
+ pero con un nuevo nombre: avgGradesSpread
+ 
+```{r}
+avgGradesSpread <- spread(avgGradesDTGather,"evaluation","grade")
+```
+
+##EJERCICIO 38
+Con arrange() de {dplyr} muestra por pantalla el resultado de
+ordenar la data.table avgGradesDTGather:
+ Nota en orden creciente: 1º por grade en orden creciente y en 2º
+lugar por school
+ Nota en orden decreciente: 1º por grade en orden decreciente, y
+2º por school
+```{r}
+avgGradesDTGather %>% arrange(grade,school)
+avgGradesDTGather %>% arrange(desc(grade),school)
+```
+##EJERCICIO EXPORTAR
+
+ Salvamos el nuevo data.frame studentMatPor, en un archivo de
+nombre studentMatPor.csv
+ con “;” como separador
+ en un subdirectorio “output” que cuelga de “datos” (recordamos
+que “datos” está en el mismo directorio que el script que estamos
+ejecutando)
+
+
+```{r}
+outputDir <- "../datos/output"
+if (!file.exists(outputDir)) {
+dir.create(outputDir)
+}
+write.table(studentMatPor,file=paste(outputDir,"studentMatPor.csv",sep="/"),sep=";",row.names=FALSE)
+```
