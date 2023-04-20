@@ -1,0 +1,955 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={PracticaSpam},
+  pdfauthor={DavidVelasco},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{PracticaSpam}
+\author{DavidVelasco}
+\date{2023-01-25}
+
+\begin{document}
+\maketitle
+
+En la detección de Spam se utilizan con frecuencia técnicas de machine
+learning para mejorar los índices de detección de correos no deseados.
+En el dataset adjunto, se han seleccionado para cada mensaje una serie
+de términos clave que suelen aparecer con frecuencia en los mensajes
+spam. Posteriormente, se ha realizado una codificación vectorial de los
+correos electrónicos considerando esos términos clave. Para cada correo
+disponemos de la clasificación por parte de los expertos humanos. Se
+pide realizar las siguientes tareas:
+
+\begin{itemize}
+\item
+  Apartado 1) Sustituir un 2\% de valores de la matriz de datos por NAs,
+  de manera aleatoria. Imputar dichos valores faltantes y justificar la
+  elección del método utilizado.(1 punto)
+\item
+  Apartado 2) Realizar un análisis exploratorio de la matriz de datos.
+  Comentar los resultados y utilizar visualizaciones cuando sea
+  necesario. (2 puntos)
+\item
+  Apartado 3) Eliminar aquellas palabras que tengan una correlación
+  elevada con otras. Calcular el número de documentos en que aparece
+  cada palabra y eliminar aquellas de menor frecuencia. Dibujar un
+  histograma de dichas frecuencias calculadas. Nota: Con la codificación
+  ``bag of words'' utilizada, el número de documentos en que aparece una
+  palabra se obtiene sumando para cada variable todas las filas. (2
+  puntos)
+\item
+  Apartado 4) Proyectar los datos sobre un subespacio de dimensión menor
+  utilizando PCA. ¿ Cuántas componentes principales se deben utilizar
+  para poder visualizar la estructura semántica de los documentos ?
+  Obtener un plot utilizando dichas compoentes principales y comentar si
+  hay estructura de grupo.(2 puntos)
+\item
+  Apartado 5) Realizar un clustering de los mensajes de spam atendiendo
+  a su contenido semántico. Discutir y comparar el resultado para dos
+  algoritmos diferentes.(2 puntos)
+\item
+  Apartado 6) Aplicar los mapas autoorganizativos para visualizar la
+  estructura semántica de la colección de documentos utilizada. ¿ Qué
+  ventajas tienen los mapas autoorganizativos con respecto a los
+  algoritmos de clustering utilizados anteriormente ? (1 punto)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Comprobación de que está el *.csv en el directorio}
+
+\NormalTok{currentDir }\OtherTok{\textless{}{-}} \FunctionTok{getwd}\NormalTok{()}
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=}\StringTok{"../datos"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "anemonefish.xls"          "beer2.csv"               
+##  [3] "DatasetLimpio.xlsx"       "EXAMPLE_DataToClean.xlsx"
+##  [5] "nombre_variables.txt"     "output"                  
+##  [7] "religions.csv"            "spam.csv"                
+##  [9] "spam.xls"                 "student-mat.csv"         
+## [11] "student-por.csv"          "student.zip"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{file.exists}\NormalTok{(}\StringTok{"../datos"}\NormalTok{)) }
+\NormalTok{\{}\FunctionTok{stop}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Se necesita que el directorio datos esté en: "}\NormalTok{,currentDir))\} }
+
+
+\NormalTok{ComprobarInputs }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(path, dir,file)}
+\NormalTok{\{}\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{file.exists}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(path,}\StringTok{"/"}\NormalTok{,dir)))}
+\NormalTok{\{}\FunctionTok{stop}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Se necesita que el directorio "}\NormalTok{, dir, }\StringTok{" esté en: "}\NormalTok{,path))\}}
+  \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{file.exists}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(path, }\StringTok{"/"}\NormalTok{,dir,}\StringTok{"/"}\NormalTok{, file)))}
+\NormalTok{    \{}\FunctionTok{stop}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Se necesita que "}\NormalTok{, file,}\StringTok{" esté en: "}\NormalTok{, path, }\StringTok{"/"}\NormalTok{, dir))\}\}}
+
+\NormalTok{parentPath }\OtherTok{\textless{}{-}} \FunctionTok{dirname}\NormalTok{(currentDir)}
+
+\FunctionTok{try}\NormalTok{(}\FunctionTok{ComprobarInputs}\NormalTok{(parentPath,}\StringTok{"datos"}\NormalTok{, }\StringTok{"spam.xls"}\NormalTok{), }\ConstantTok{FALSE}\NormalTok{)}
+
+\DocumentationTok{\#\#Unificacion de los dos ficheros en un dataframe}
+
+\CommentTok{\#Cargo el xls y separo mediante un espacio los registros}
+\NormalTok{dtDatos}\OtherTok{=}\FunctionTok{read.table}\NormalTok{(}\StringTok{"../datos/spam.xls"}\NormalTok{,}\AttributeTok{sep=}\StringTok{" "}\NormalTok{,}\AttributeTok{header=}\ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\#Cargo los valores del fichero nombre\_variables que serán el nombre de las columnas}
+\NormalTok{dtCabeceraFilas}\OtherTok{=}\FunctionTok{read\_fwf}\NormalTok{(}\StringTok{"../datos/nombre\_variables.txt"}\NormalTok{,}\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
+ 
+\CommentTok{\#Superpongo las datos de las filas por columnas}
+\NormalTok{dtCabeceraColumnas }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(dtCabeceraFilas))}
+
+\CommentTok{\#Unifico las dos tablas copiando la fila 1 en las cabecera del dataset final}
+\FunctionTok{names}\NormalTok{(dtDatos)}\OtherTok{\textless{}{-}}\NormalTok{ dtCabeceraColumnas[}\DecValTok{1}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Apartado 1)}
+
+  \CommentTok{\#Nrow= 4601 y ncol=58}
+  \CommentTok{\#nValores a sustituir=4601*58*0,02}
+
+\NormalTok{  constante }\OtherTok{=} \FloatTok{0.02}
+\NormalTok{  filas}\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(dtDatos)}
+\NormalTok{  columnas}\OtherTok{\textless{}{-}}\FunctionTok{ncol}\NormalTok{(dtDatos)}\SpecialCharTok{{-}}\DecValTok{1} \CommentTok{\#Borro 1 para no poner NA en la ultima columna}
+\NormalTok{  nvalores }\OtherTok{\textless{}{-}} \FunctionTok{ceiling}\NormalTok{( filas}\SpecialCharTok{*}\NormalTok{ (columnas}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)  }\SpecialCharTok{*}\NormalTok{ constante)}
+  \CommentTok{\#Hay 5338 NA en la matriz}
+  
+  \CommentTok{\#Duplico el dataframe para hacer este apartado}
+\NormalTok{  dtDatosNA}\OtherTok{\textless{}{-}}\NormalTok{dtDatos}
+
+  \CommentTok{\#Pasos y justificación}
+  \CommentTok{\#{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  
+  \CommentTok{\#1. Recorro mediante un while hasta completar el 2\% de los valores del dataframe}
+  \CommentTok{\#2. Obtengo un valor aleatorio entre 1 y el numero de filas y entre 1 y el numero de columnas}
+  \CommentTok{\#3. Compruebo si en esa celda hay un NA.}
+  \CommentTok{\#3.1 Si es un NA reiniciamos la iteración del bucle}
+  \CommentTok{\#3.2 Si no hay NA, seteamos el NA en esa celda e iteramos el bucle}
+  
+  \CommentTok{\#Nota: La funcion sample(x:y,1) obtiene un(1) nº aleatorio entre \textquotesingle{}x\textquotesingle{} e \textquotesingle{}y\textquotesingle{}}
+\NormalTok{  i}\OtherTok{=}\DecValTok{1}
+  \ControlFlowTok{while}\NormalTok{(i}\SpecialCharTok{\textless{}=}\NormalTok{nvalores)\{}
+\NormalTok{    valorfila }\OtherTok{\textless{}{-}}\FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{filas,}\DecValTok{1}\NormalTok{)}
+\NormalTok{    valorcol}\OtherTok{\textless{}{-}}\FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{columnas,}\DecValTok{1}\NormalTok{)}
+    
+    \ControlFlowTok{if}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dtDatosNA[valorfila,valorcol]))\{}
+\NormalTok{    \}}\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{      dtDatosNA[valorfila,valorcol]}\OtherTok{=}\ConstantTok{NA}
+\NormalTok{      i}\OtherTok{\textless{}{-}}\NormalTok{i}\SpecialCharTok{+}\DecValTok{1}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \CommentTok{\#Compruebo que tengo los 5338 valores en dtDatosNa}
+\NormalTok{  valoresNA }\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dtDatosNA))}
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Total valores NA en el dataframe dtDatosNA: "}\NormalTok{, valoresNA,}\AttributeTok{sep=}\StringTok{" "}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Total valores NA en el dataframe dtDatosNA:  5338
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Comprobación por columnas}
+  \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{lapply}\NormalTok{( }\FunctionTok{lapply}\NormalTok{( dtDatosNA,is.na),sum))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   make address all X3d our over remove internet order mail receive will people
+## 1  115     107  93  86  90   93     99       99    94   97      97   82     75
+##   report addresses free business email you credit your font X000 money hp hpl
+## 1     81        95   93       96   106  83     85  104  101   99    98 92 100
+##   george X650 lab labs telnet X857 data X415 X85 technology X1999 parts pm
+## 1     86   94  89   89     71   77   89   79 102        111    97    94 85
+##   direct cs meeting original project re edu table conference X. X..1 X..2 X..3
+## 1    104 85      89       92     102 91  97    93        108 96  102  107   86
+##   X..4 X..5 cap_run_length_average cap_run_length_longest cap_run_length_total
+## 1  104   89                     74                     90                  106
+##   clase
+## 1     0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Ultimo paso: Donde hay NA sustituir valores y justificar el metodo}
+  \CommentTok{\#El metodo elegido es na\_interpolation de biblioteca imputeTS}
+  \CommentTok{\#Es utili cuando los valores NA estan distribuidos de forma aleatoria y se desea}
+  \CommentTok{\#mantener la tendencia general de los datos}
+
+  \FunctionTok{library}\NormalTok{(imputeTS)}
+\NormalTok{  dtDatosFilled}\OtherTok{\textless{}{-}}\FunctionTok{na\_interpolation}\NormalTok{(dtDatosNA)}
+
+  \CommentTok{\#Compruebo que no tengo ningun valor NA}
+\NormalTok{  valoresNAfil }\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dtDatosFilled))}
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Total valores NA en el dataframe dtDatosFilled: "}\NormalTok{, valoresNAfil,}\AttributeTok{sep=}\StringTok{" "}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Total valores NA en el dataframe dtDatosFilled:  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Destacar que la ultima columna es la que confirma si es o no spam el correo}
+  \FunctionTok{dim}\NormalTok{(dtDatosFilled)  }\CommentTok{\#Filas(emails) y columnas(variables)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4601   58
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Visualizacion}
+  
+  \CommentTok{\#Vamos a comprobar por ejemplo si business/free/you siguen una distribucio normal}
+  \FunctionTok{boxplot}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{business)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{qqnorm}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{business)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{hist}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{business)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{shapiro.test}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{business)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dtDatosFilled$business
+## W = 0.3621, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{boxplot}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{free)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{qqnorm}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{free)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{hist}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{free)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{shapiro.test}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{free)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dtDatosFilled$free
+## W = 0.3087, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{boxplot}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{you)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{qqnorm}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{you)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{hist}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{you)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-9.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{shapiro.test}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{you)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dtDatosFilled$you
+## W = 0.84725, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Ninguna de ellas sigue una distribucion normal. La más cerca de hacerlo es la variable \textquotesingle{}you\textquotesingle{}}
+  
+  \CommentTok{\#Correos spam o no spam}
+  \FunctionTok{hist}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{clase,}\AttributeTok{main=}\StringTok{"Cantidad de correos spam"}\NormalTok{,}
+       \AttributeTok{col=} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"blue"}\NormalTok{),}
+       \AttributeTok{ylab=}\StringTok{"Suma total"}\NormalTok{,}
+       \AttributeTok{xlab=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-2-10.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  p}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{clase)}
+  \FunctionTok{prop.table}\NormalTok{(p) }\CommentTok{\#Porcentaje de correos si o no spam}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##         0         1 
+## 0.6059552 0.3940448
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Compruebo correlacion entre variables aleatoriamente mediante graficos}
+  \FunctionTok{plot}\NormalTok{(dtDatosFilled[,}\FunctionTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{50}\NormalTok{,}\DecValTok{55}\NormalTok{,}\DecValTok{56}\NormalTok{,}\DecValTok{57}\NormalTok{,}\DecValTok{58}\NormalTok{)]) }\CommentTok{\#No se observa ninguna correlacion entre las variables seleccionadas}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Resumen por variables}
+  \FunctionTok{require}\NormalTok{(psych)}
+\NormalTok{  psych}\SpecialCharTok{::}\FunctionTok{describe}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{cap\_run\_length\_total) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    vars    n   mean     sd median trimmed    mad min   max range skew kurtosis
+## X1    1 4601 279.48 560.33     95  156.53 112.68   1 10062 10061 6.39    71.76
+##      se
+## X1 8.26
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  psych}\SpecialCharTok{::}\FunctionTok{describe}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{free) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    vars    n mean   sd median trimmed mad min max range  skew kurtosis   se
+## X1    1 4601 0.25 0.82      0    0.08   0   0  20    20 10.85   199.14 0.01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  psych}\SpecialCharTok{::}\FunctionTok{describe}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\NormalTok{money) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    vars    n mean   sd median trimmed mad min  max range  skew kurtosis   se
+## X1    1 4601 0.09 0.44      0    0.01   0   0 12.5  12.5 14.73   303.28 0.01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Apartado 3)}
+  \CommentTok{\#La correlacion entre dos variables va desde {-}1 a 1(correlacion negativa o positiva perfecta)}
+  \CommentTok{\#Cuanto más cerca este de 1 o {-}1 la correlación es más alta.}
+  \CommentTok{\#Atendiendo al apartado anterior donde se representa la correlacion en el cruce de variables}
+  \CommentTok{\#Considerando a partir de 0.90(neg. o pos.) una correlacion alta:}
+  \CommentTok{\#Se observa correlacion alta para las variables 857 y 415}
+
+\NormalTok{  M}\OtherTok{\textless{}{-}}\FunctionTok{cor}\NormalTok{(}\FunctionTok{Filter}\NormalTok{(is.numeric, dtDatosFilled))}
+  
+  \FunctionTok{library}\NormalTok{(corrplot)}
+\NormalTok{  cor\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(dtDatosFilled)}
+  
+  \CommentTok{\#Considero a partir de 85\% una correlacion alta}
+\NormalTok{  listaPalabrasCorr }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(cor\_matrix, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{which}\NormalTok{(x }\SpecialCharTok{\textgreater{}=} \FloatTok{0.85} \SpecialCharTok{\&}\NormalTok{ x }\SpecialCharTok{\textless{}} \DecValTok{1}\NormalTok{))}
+\NormalTok{  columnasEliminar }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(listaPalabrasCorr)}
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Las columna a borrar son:"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Las columna a borrar son:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{paste}\NormalTok{(columnasEliminar,}\AttributeTok{sep=}\StringTok{" "}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 34 32
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{cor}\NormalTok{(dtDatosFilled}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{857}\StringTok{\textasciigrave{}}\NormalTok{, dtDatosFilled}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{415}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9815477
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Se borran las columnas 34 y 32 que son las que tienen una correlacion muy alta entre ellas}
+\NormalTok{  dtDatosFinal}\OtherTok{\textless{}{-}}\NormalTok{dtDatosFilled}
+\NormalTok{  dtDatosFinal}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{857}\StringTok{\textasciigrave{}}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{415}\StringTok{\textasciigrave{}}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+  
+\NormalTok{  M2}\OtherTok{\textless{}{-}}\FunctionTok{cor}\NormalTok{(}\FunctionTok{Filter}\NormalTok{(is.numeric, dtDatosFinal)) }\CommentTok{\#La siguiente correlacion mas alta está alrededor del 0.65}
+  
+  \CommentTok{\#Calculo del nº de documentos en los que aparece una palabra = Suma de cada variable en todas las filas}
+\NormalTok{  dtDocumentosPalabra}\OtherTok{\textless{}{-}}\FunctionTok{colSums}\NormalTok{(dtDatosFinal)}
+  \FunctionTok{class}\NormalTok{(dtDocumentosPalabra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  dfDocumentosPalabra}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(dtDocumentosPalabra)}
+  
+  \CommentTok{\#Ploteo el histograma para ver que variables puedo suprimir}
+  \FunctionTok{hist}\NormalTok{(dfDocumentosPalabra}\SpecialCharTok{$}\NormalTok{dtDocumentosPalabra)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Ordeno de menor a mayor y decido que borro las columnas cuyo valor es inferior a 200}
+  \FunctionTok{library}\NormalTok{(dplyr)}
+\NormalTok{  dfDocumentosPalabra }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(dtDocumentosPalabra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                        dtDocumentosPalabra
+## table                              24.5050
+## parts                              63.8850
+## [                                  78.6525
+## conference                        134.1850
+## ;                                 175.1630
+## #                                 199.5840
+## cs                                200.1300
+## original                          214.7200
+## addresses                         228.8100
+## report                            271.1000
+## receive                           278.2750
+## telnet                            287.5300
+## direct                            302.1950
+## 3d                                319.6050
+## project                           347.9950
+## $                                 350.7780
+## pm                                355.0400
+## credit                            397.1050
+## order                             410.1300
+## money                             430.2950
+## people                            430.7900
+## over                              444.1550
+## data                              446.8600
+## technology                        449.3600
+## lab                               466.7150
+## labs                              471.1250
+## 000                               474.9300
+## 85                                481.9350
+## make                              484.3750
+## internet                          488.7500
+## remove                            523.4650
+## font                              565.1500
+## 650                               567.0200
+## meeting                           595.9500
+## 1999                              626.4300
+## (                                 639.7745
+## business                          648.8400
+## edu                               837.6000
+## email                             845.0600
+## address                           986.6100
+## mail                             1100.2600
+## free                             1141.2700
+## hpl                              1216.7900
+## !                                1234.3125
+## all                              1297.1300
+## re                               1396.2750
+## our                              1439.3600
+## clase                            1813.0000
+## will                             2500.9700
+## hp                               2563.7450
+## george                           3538.9100
+## your                             3733.0650
+## you                              7637.1800
+## cap_run_length_average          23921.9450
+## cap_run_length_longest         239449.5000
+## cap_run_length_total          1285894.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Borro las columnas con menos frecuencia, son 5: table {-}conference {-} ; {-} parts {-} [}
+  
+\NormalTok{  dtDatosFinal}\SpecialCharTok{$}\NormalTok{table}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal}\SpecialCharTok{$}\NormalTok{conference}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{;}\StringTok{\textasciigrave{}}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal}\SpecialCharTok{$}\NormalTok{parts}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{[}\StringTok{\textasciigrave{}}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal}\SpecialCharTok{$}\NormalTok{cs}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+  
+  \CommentTok{\#Además, considero que es mejor eliminar las ultimas 4 columnas para observar mejor el histograma}
+  \CommentTok{\#de la frecuencia de las palabras y que haya ruido}
+  \CommentTok{\#Lo guardo en otro dataframe porque voy a trabajar con dtDatosFinal en los apartados siguientes.}
+\NormalTok{  dtDatosFinal2 }\OtherTok{\textless{}{-}}\NormalTok{ dtDatosFinal}
+  
+\NormalTok{  dtDatosFinal2}\SpecialCharTok{$}\NormalTok{cap\_run\_length\_total}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal2}\SpecialCharTok{$}\NormalTok{cap\_run\_length\_longest }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal2}\SpecialCharTok{$}\NormalTok{cap\_run\_length\_average}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{  dtDatosFinal2}\SpecialCharTok{$}\NormalTok{clase}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+  
+  
+\NormalTok{  dtDocumentosPalabra}\OtherTok{\textless{}{-}}\FunctionTok{colSums}\NormalTok{(dtDatosFinal2)}
+\NormalTok{  dfDocumentosPalabra}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(dtDocumentosPalabra)}
+  
+  \CommentTok{\#Ploteamos}
+  \FunctionTok{hist}\NormalTok{(dfDocumentosPalabra}\SpecialCharTok{$}\NormalTok{dtDocumentosPalabra)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-5-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Ploteamos poniendo limites en el eje de las x}
+  \FunctionTok{hist}\NormalTok{(dfDocumentosPalabra}\SpecialCharTok{$}\NormalTok{dtDocumentosPalabra,}
+       \AttributeTok{breaks =}\FunctionTok{seq}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{8500}\NormalTok{,}\DecValTok{150}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-5-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Ploteamos de nuevo}
+  \FunctionTok{hist}\NormalTok{(dfDocumentosPalabra}\SpecialCharTok{$}\NormalTok{dtDocumentosPalabra,}
+       \AttributeTok{breaks =}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{8500}\NormalTok{,}\DecValTok{200}\NormalTok{),}
+       \AttributeTok{col=}\StringTok{"\#0099F8"}\NormalTok{,}
+       \AttributeTok{border=}\StringTok{"\#000000"}\NormalTok{,}
+       \AttributeTok{ylab=}\StringTok{"Frecuencia"}\NormalTok{,}
+       \AttributeTok{xlab=}\StringTok{"Suma de palabras"}\NormalTok{,}
+       \AttributeTok{main=}\StringTok{\textquotesingle{}Conteo total\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-5-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Observamos que hay una palabra(you) que aparece con diferencia más veces que el resto.}
+  \CommentTok{\#La mayoria de palabra están entre las 0 y las 170 apariciones}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Apartado 4)}
+  
+  \CommentTok{\#Lo primero antes de realizar un analisis de componentes es normalizar la matriz.}
+\NormalTok{  dtDatosFinalNorm }\OtherTok{\textless{}{-}} \FunctionTok{scale}\NormalTok{(dtDatosFinal)}
+
+
+\NormalTok{  dtDatosFinal\_PCA }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(dtDatosFinalNorm[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{], }\AttributeTok{center =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{scale. =} \ConstantTok{TRUE}\NormalTok{)}
+  
+  \FunctionTok{barplot}\NormalTok{(dtDatosFinal\_PCA}\SpecialCharTok{$}\NormalTok{sdev}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(dtDatosFinal\_PCA}\SpecialCharTok{$}\NormalTok{sdev}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
+        \AttributeTok{names.arg =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(dtDatosFinal\_PCA}\SpecialCharTok{$}\NormalTok{sdev), }
+        \AttributeTok{xlab =} \StringTok{"Componente principal"}\NormalTok{, }
+        \AttributeTok{ylab =} \StringTok{"Porcentaje de varianza explicado"}\NormalTok{, }
+        \AttributeTok{main =} \StringTok{"Porcentaje de varianza explicado por componente principal"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Para ver la legenda de los graficos tienen que ejecutarse las dos sentencias a la vez}
+  \FunctionTok{plot}\NormalTok{(dtDatosFinal\_PCA}\SpecialCharTok{$}\NormalTok{x[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{], }\AttributeTok{col =} \FunctionTok{ifelse}\NormalTok{(dtDatosFinal[,}\DecValTok{50}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }\AttributeTok{pch =} \DecValTok{16}\NormalTok{, }\AttributeTok{cex =} \DecValTok{1}\NormalTok{, }\AttributeTok{main =} \StringTok{"PCA   con dos componentes principales"}\NormalTok{)}
+  \FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"No es spam"}\NormalTok{, }\StringTok{"Es spam"}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }\AttributeTok{pch =} \DecValTok{16}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-6-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{library}\NormalTok{(scatterplot3d)}
+  \FunctionTok{scatterplot3d}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dtDatosFinal\_PCA}\SpecialCharTok{$}\NormalTok{x[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], }\AttributeTok{y =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{z =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{color =} \FunctionTok{ifelse}\NormalTok{(dtDatosFinal[,}\DecValTok{50}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }\AttributeTok{pch =} \DecValTok{16}\NormalTok{, }\AttributeTok{cex.symbols =} \DecValTok{1}\NormalTok{, }\AttributeTok{main =} \StringTok{"PCA con tres componentes principales"}\NormalTok{)}
+  \FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"No es spam"}\NormalTok{, }\StringTok{"Es spam"}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }\AttributeTok{pch =} \DecValTok{16}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-6-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Observando el barplot se observa que las dos primeras componentes principales explican el 18\% y junto con la        \#tercera explican el 22\%. Bajo mi punto de vista con 2 componentes principales ya se puede visualizar la }
+  \CommentTok{\#estructura semántica de los doscumentos. }
+  
+  \CommentTok{\#Ploteando el grafico con 2 y 3 CP se puede ver que si hay estructura de grupo.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Apartado 5)}
+  \CommentTok{\#Clustering para dos metodos diferentes}
+  
+  \FunctionTok{library}\NormalTok{(cluster)}
+  \FunctionTok{library}\NormalTok{(factoextra)}
+  \FunctionTok{library}\NormalTok{(magrittr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'magrittr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     set_names
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tidyr':
+## 
+##     extract
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Me quedo solo con los correos spam}
+\NormalTok{  dtDatosFinal\_spam }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(dtDatosFinal, clase }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)}
+  
+  \CommentTok{\#Borro la ultima columna ya que no es necesaria}
+\NormalTok{  dtDatosFinal\_spam}\SpecialCharTok{$}\NormalTok{clase}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+  
+  \CommentTok{\#Escalo para que todas las variables tengan mismo peso}
+\NormalTok{  dtDatosFinal\_spam\_scaled }\OtherTok{\textless{}{-}} \FunctionTok{scale}\NormalTok{(dtDatosFinal\_spam)}
+  
+  \CommentTok{\#Uso el método del codo para encontrar el nº óptimo de clusters}
+  \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{\textquotesingle{}factoextra\textquotesingle{}}\NormalTok{)) \{}
+    \FunctionTok{install.packages}\NormalTok{(}\StringTok{\textquotesingle{}factoextra\textquotesingle{}}\NormalTok{)}
+    \FunctionTok{library}\NormalTok{(}\StringTok{\textquotesingle{}factoextra\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \}}
+  \FunctionTok{fviz\_nbclust}\NormalTok{(dtDatosFinal\_spam\_scaled, kmeans, }\AttributeTok{method=}\StringTok{"wss"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Según el método del codo he decidido que lo mejor es hacer 3 grupos.}
+  
+  \CommentTok{\#Como no hay mucha correspondencia entre todas las variables se podrian}
+  \CommentTok{\#llegar a hacer 9 grupos pero sabemos que no lo mejor por la varianza que está sin explicar}
+  
+  
+  
+  \FunctionTok{library}\NormalTok{(stats)}
+  \FunctionTok{library}\NormalTok{(ggplot2)}
+  
+  \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{\textquotesingle{}ggplot2\textquotesingle{}}\NormalTok{)) \{}
+    \FunctionTok{install.packages}\NormalTok{(}\StringTok{\textquotesingle{}ggplot2\textquotesingle{}}\NormalTok{)}
+    \FunctionTok{library}\NormalTok{(}\StringTok{\textquotesingle{}ggplot2\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \}}
+  
+  \CommentTok{\#1{-}er algoritmo: K{-}means}
+  
+  \FunctionTok{fviz\_cluster}\NormalTok{(}\FunctionTok{kmeans}\NormalTok{(dtDatosFinal\_spam\_scaled,}\AttributeTok{centers=}\DecValTok{3}\NormalTok{, }\AttributeTok{iter.max =} \DecValTok{1500}\NormalTok{, }\AttributeTok{nstart=}\DecValTok{25}\NormalTok{), }\AttributeTok{data=}\NormalTok{dtDatosFinal\_spam\_scaled)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Haciendo pruebas con distintos parámetros tomamos la decision de eliminar el outlier}
+  \CommentTok{\#porque no ayuda a explicar los grupos y está muy lejos de cualquier grupo}
+  
+\NormalTok{  dtDatosFinal\_spam\_scaled\_sin\_outlier }\OtherTok{\textless{}{-}}\NormalTok{ dtDatosFinal\_spam\_scaled[}\SpecialCharTok{{-}}\DecValTok{1754}\NormalTok{,]}
+  \FunctionTok{fviz\_nbclust}\NormalTok{(dtDatosFinal\_spam\_scaled\_sin\_outlier, kmeans, }\AttributeTok{method=}\StringTok{"wss"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-7-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Se disminuye la cantidad de grupos y se mejora la calidad de los grupos}
+  
+  \FunctionTok{fviz\_cluster}\NormalTok{(}\FunctionTok{kmeans}\NormalTok{(dtDatosFinal\_spam\_scaled\_sin\_outlier,}\AttributeTok{centers=}\DecValTok{3}\NormalTok{, }\AttributeTok{iter.max =} \DecValTok{1500}\NormalTok{, }\AttributeTok{nstart=}\DecValTok{25}\NormalTok{,), }\AttributeTok{data=}\NormalTok{dtDatosFinal\_spam\_scaled\_sin\_outlier, }\AttributeTok{geom =} \StringTok{"density"}\NormalTok{,}
+             \AttributeTok{show.centroids =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-7-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#2º Algortimo K{-}Medioides = PAM}
+  
+  \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{)) \{}
+    \FunctionTok{install.packages}\NormalTok{(}\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{)}
+    \FunctionTok{library}\NormalTok{(}\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \}}
+  
+  \CommentTok{\#Usando otra forma para comprobar el numero ideal de grupos decido que el tamaño ideal es 3}
+\NormalTok{  gap\_stat }\OtherTok{\textless{}{-}} \FunctionTok{clusGap}\NormalTok{(dtDatosFinal\_spam\_scaled\_sin\_outlier,}
+                    \AttributeTok{FUN =}\NormalTok{ pam,}
+                    \AttributeTok{K.max =} \DecValTok{5}\NormalTok{, }\CommentTok{\#Nº Maximos de clusters}
+                    \AttributeTok{B =} \DecValTok{5}\NormalTok{) }\CommentTok{\#Nº de veces que se genera conjunto aleatorio}
+
+  \FunctionTok{fviz\_gap\_stat}\NormalTok{(gap\_stat)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-7-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Guardar en kmed con 3 clusters}
+\NormalTok{  kmed }\OtherTok{\textless{}{-}} \FunctionTok{pam}\NormalTok{(dtDatosFinal\_spam\_scaled\_sin\_outlier, }\AttributeTok{k =} \DecValTok{3}\NormalTok{)}
+  
+  \FunctionTok{fviz\_cluster}\NormalTok{(kmed, }\AttributeTok{data =}\NormalTok{ dtDatosFinal\_spam\_scaled\_sin\_outlier)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-7-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Partiendo de que las observaciones son muy dispares y muchas variables para cada observacion}
+  \CommentTok{\#Haciendo el clustering solo para los correos que son spam, de los 3 grupos que se ven en el plot,}
+  \CommentTok{\#se puede concluir que hay un grupo que es considerado spam consistentemente y los otros dos grupos tienen}
+  \CommentTok{\#tendencia; uno de ellos a 100\% ser considerado correo malicioso y otro de ellos que es considerado}
+  \CommentTok{\#spam pero tiene ciertos componentes que no lo deja claramente agrupado en esta categoría}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Apartado 6)}
+
+  \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{\textquotesingle{}kohonen\textquotesingle{}}\NormalTok{)) \{}
+    \FunctionTok{install.packages}\NormalTok{(}\StringTok{\textquotesingle{}kohonen\textquotesingle{}}\NormalTok{)}
+    \FunctionTok{library}\NormalTok{(}\StringTok{\textquotesingle{}kohonen\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: kohonen
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'kohonen'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     map
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# Cargamos la matriz con los datos con lo que realicé el apartado anterior.(Matriz sin el outlier)}
+  \FunctionTok{data}\NormalTok{(dtDatosFinal\_spam\_scaled\_sin\_outlier)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in data(dtDatosFinal_spam_scaled_sin_outlier): data set
+## 'dtDatosFinal_spam_scaled_sin_outlier' not found
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# Creamos el mapa autoorganizativo}
+\NormalTok{  som\_map }\OtherTok{\textless{}{-}} \FunctionTok{som}\NormalTok{(dtDatosFinal\_spam\_scaled\_sin\_outlier[, }\SpecialCharTok{{-}}\FunctionTok{ncol}\NormalTok{(dtDatosFinal\_spam\_scaled\_sin\_outlier)], }\AttributeTok{grid =} \FunctionTok{somgrid}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{, }\StringTok{"rectangular"}\NormalTok{))}
+
+  \CommentTok{\# Visualizamos el mapa}
+  \FunctionTok{plot}\NormalTok{(som\_map, }\AttributeTok{type =} \StringTok{"count"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Mapa Autoorganizativo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PracticaSpam_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#Las ventajas que tienen los mapas autoorganizativos frente a los algoritmos de clustering son:}
+  
+  \CommentTok{\# 1.Los mapas autoorganizativos preservan la topología de los datos de entrada, lo que significa que los puntos      similares se agrupan juntos en el mapa y los puntos diferentes se separan. Esto puede ser muy útil para              identificar patrones y tendencias complejos en los datos que podrían ser difíciles de detectar con otros             métodos.}
+  
+  \CommentTok{\# 2.Los mapas autoorganizativos son una buena opción para la exploración de datos y la                               identificación de patrones sin conocimiento previo de la estructura de los datos.}
+  
+  \CommentTok{\# 3.Fácil de implementar: Los mapas autoorganizativos son relativamente fáciles de implementar y no requieren mucha   configuración previa. Esto los hace accesibles y fáciles de usar para una amplia variedad de usuarios, incluyendo    aquellos sin experiencia previa en aprendizaje automático o análisis de datos.}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
